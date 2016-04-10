@@ -1,5 +1,9 @@
 'use strict';
 
+//importing module:
+var movies = require('./movies');
+var foods = require('./foods');
+
 function placeAnOrder(orderNumber) {
     console.log("costumer order: ", orderNumber);
     cookAndDeliverFood(function () {
@@ -15,3 +19,9 @@ placeAnOrder(1);
 placeAnOrder(2);
 placeAnOrder(3);
 placeAnOrder(4);
+
+//this will happen before the callback from cookAndDeliverFood
+movies.avatar();
+
+foods.printFavorite();
+foods.printIngredients();
