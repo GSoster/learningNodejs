@@ -1,2 +1,0 @@
-require("./emily");
-require("./bucky");
