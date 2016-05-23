@@ -1,7 +1,17 @@
 'use strict';
+
+var exec = require("child_process").exec;
+
 function start() {
     console.log("requestHandler 'start' called");
-    return "Hello start";
+
+    var content = "empty";
+
+    exec("ls -lah", function(error, stdout, stderr){
+      content = stdout;
+    });
+
+    return content;
 };
 
 function upload() {
@@ -9,11 +19,5 @@ function upload() {
     return "Hello upload";
 };
 
-function page(){
-  console.log("requestHandler 'page' called");
-  return "Hello page";
-};
-
-exports.page = page;
 exports.start = start;
 exports.upload = upload;
