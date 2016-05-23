@@ -1,8 +1,9 @@
 'use strict';
+//we want some specific information from postData (our entire request)
+//so we'll use querystring to get it.
+var querystring = require("querystring");
 
-var exec = require("child_process").exec;
-
-function start(response) {
+function start(response, postData) {
     console.log("requestHandler 'start' called");
     //exec("ls -lah", function(error, stdout, stderr){
     var body = '<html><head>'+
@@ -18,10 +19,10 @@ function start(response) {
     response.end();
 };
 
-function upload(response) {
+function upload(response, postData) {
     console.log("requestHandler 'upload' called");
     response.writeHead(200, {"Content-Type" : "text/plain"});
-    response.write("Hello upload");
+    response.write("You've sent: " + querystring.parse(postData).text);
     response.end();
 };
 
