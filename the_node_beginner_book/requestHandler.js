@@ -1,14 +1,17 @@
 'use strict';
 function start() {
-    console.log("start called");
+    console.log("requestHandler 'start' called");
+    return "Hello start";
 };
 
 function upload() {
-    console.log("upload called");
+    console.log("requestHandler 'upload' called");
+    return "Hello upload";
 };
 
 function page(){
-  console.log("page called");
+  console.log("requestHandler 'page' called");
+  return "Hello page";
 };
 
 exports.page = page;
