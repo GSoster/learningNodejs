@@ -2,6 +2,10 @@ var http = require('http');
 var url = require('url'); //our router needs it to get the path
 
 
+
+/*
+route here is a function from ./router.js
+*/
 function start(route, handle) {
 
     function onRequest(request, response) {
@@ -16,7 +20,6 @@ function start(route, handle) {
         response.write("it started");
         response.end();
     }
-
 
 
     http.createServer(onRequest).listen(80);
