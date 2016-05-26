@@ -2,6 +2,7 @@
 //we want some specific information from postData (our entire request)
 //so we'll use querystring to get it.
 var querystring = require("querystring");
+var fs = require("fs");
 
 function start(response, postData) {
     console.log("requestHandler 'start' called");
@@ -26,5 +27,21 @@ function upload(response, postData) {
     response.end();
 };
 
+function show(response, postData){
+  console.log("request handler 'show' was called.");
+  fs.readFile("/tmp/test.png", "binary", function(error, file){
+    if (error){
+      response.writeHead(500, {"Content-Type" : "text/plain"});
+      response.write(error + "\n");
+      response.end();
+    } else {
+      response.writeHead(500, {"Content-Type" : "image/png"});
+      response.write(file, "binary");
+      response.end();
+    }
+  });
+};
+
 exports.start = start;
 exports.upload = upload;
+exports.show = show;
