@@ -1,4 +1,3 @@
-
 /*
 * this module is used in the exercise 6: make it modular.
 * this file is being used by the file: makeItModular.js
@@ -13,14 +12,9 @@ function printListOfFilesByExtension(directory, extension, callback){
       return callback(error);
     }
     var filteredList = [];//no errros, we can put in this array the filtered data.
-    for (var i = 0; i < list.length; i++){
-      if (path.extname(list[i]) === "."+extension){
-        filteredList.push(list[i]);
-      }
-    }
+    filteredList = list.filter(function(file){return (path.extname(file) === "."+extension);});
     return callback(null, filteredList);
   });
 };
-
 
 module.exports = printListOfFilesByExtension;
