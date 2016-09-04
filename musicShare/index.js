@@ -1,46 +1,24 @@
-var fs = require('fs');
-var path = require('path');
+// 1- list all files
+// 2- serve an image file to the web page
+// 3- serve a music file to the web page
 var http = require('http');
+var fs = require('fs');
+var requestHandler = require('./requestHandler');
+var musicHandler = require('./musicHandler');
+url = require('url');//to get calls of images/musics
 
-function readMusics(extension) {
-  fs.readdir(__dirname, function(error, list) {
-    list.map((aFile) => {
-      (path.extname(aFile) === extension) ? console.log(aFile) : null ;
-    });
-  });
-}
+musicHandler.getMusics('.mp3');
 
-function getMusics (extension) {
-  fs.readdir(__dirname, function(error, list) {
-    list.filter( (aFile) => {
-      return (path.extname(aFile) === extension);
-    });
-  });
-};
-
-
-//readMusics('.mp3');
-getMusics('.mp3');
-
-//404 response
-function send404Response(response) {
-    response.writeHead(404, {
-        "Content-Type": 'text/plain'
-    });
-    response.write("Sorry, we couldn't find the page you've requested");
-    response.end();
-}
 
 //handle a user request
 function onRequest(request, response) {
+  var req = url.parse(request.url, true);
+  var action = req.pathname;
     if (request.method == 'GET' && request.url == '/') {
-        response.writeHead(200, {
-            "Content-Type": 'text/html'
-        });
-        response.write("<h1>Work?</h1>");
+        musicHandler.showMusicIcon(response);        
         fs.createReadStream('./index.html').pipe(response);
     } else {
-        send404Response(response);
+        requestHandler.errorResponse(response);
     }
 }
 var server = http.createServer(onRequest);
