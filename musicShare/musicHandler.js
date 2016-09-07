@@ -21,5 +21,18 @@ function showMusicIcon (response) {
 };
 
 
+function streamMusic(filePath, response){
+  //var filePath = './never.mp3',
+  let stat = fs.statSync(filePath);
+  response.writeHead(200, {
+      'Content-Type': 'audio/mpeg',
+      'Content-Length': stat.size
+  });
+  // We replaced all the event handlers with a simple call to util.pump()
+  fs.createReadStream(filePath).pipe(response);
+};
+
+
 exports.getMusics = getMusics;
 exports.showMusicIcon = showMusicIcon;
+exports.streamMusic = streamMusic;
