@@ -21,6 +21,7 @@ function showMusicIcon (response) {
 };
 
 
+//comes from here: https://gist.github.com/dtrce/1204243
 function streamMusic(filePath, response){
   //var filePath = './never.mp3',
   let stat = fs.statSync(filePath);
