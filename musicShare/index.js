@@ -14,6 +14,8 @@ var http = require('http'),
 http.createServer(function(request, response) {
   var req = url.parse(request.url, true);
   var action = req.pathname;
+  musicHandler.getMusics('.mp3');
+
   if (request.method == 'GET' && request.url == '/') {
       fs.createReadStream(__dirname +'/index.html').pipe(response);
   }else if(request.method == 'GET' && request.url == '/music'){
