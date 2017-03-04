@@ -86,6 +86,18 @@ router.route('/bears/:bear_id')
   })
 })
 
+.delete(function(req, res){
+  console.log("Param to DELETE : " + req.params.bear_id);
+  Bear.remove({
+    _id: req.params.bear_id
+  }, function(err, bear){
+      if(err)
+        res.send(err);
+      res.json({message: 'Successfully deleted!'});
+
+  });
+});
+
 
 
 // REGISTER OUR ROUTES ---------------
