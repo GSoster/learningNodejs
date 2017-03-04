@@ -34,7 +34,7 @@ router.get('/', function(req, res){
 });
 //more routes for our API
 
-// on routes that end in /bears
+// ## on routes that end in /bears
 router.route('/bears')
 //create a bear (accessed at POST httpp://localhost:8080/api/bears)
 .post(function(req, res){
@@ -58,6 +58,34 @@ router.route('/bears')
     res.json(bears);
   });
 })
+
+//## on routes that end in /bears/:bear_id
+router.route('/bears/:bear_id')
+//get the bear with that id (accessed at GET httpp://localhost:8080/api/bears/:bear_id)
+.get(function(req, res){
+  console.log("Param to GET : " + req.params.bear_id);
+  Bear.findById(req.params.bear_id, function(err, bear){
+    if(err)
+      res.send(err);
+    res.json(bear);
+  })
+})
+
+.put(function(req, res){
+  console.log("Param to PUT : " + req.params.bear_id);
+  Bear.findById(req.params.bear_id, function(err, bear){
+    if(err)
+      res.send(err);
+    bear.name = req.body.name;//update the bears info
+    bear.save(function(err){
+      if(err)
+        res.send(err);
+      res.json({message: 'bear (id: '+req.params.bear_id+') updated!'});
+    });
+
+  })
+})
+
 
 
 // REGISTER OUR ROUTES ---------------
