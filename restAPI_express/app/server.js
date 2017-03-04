@@ -50,6 +50,15 @@ router.route('/bears')
   });
 })
 
+//getting all bears (accessed at GET httpp://localhost:8080/api/bears)
+.get(function(req, res){
+  Bear.find(function(err, bears){
+    if(err)
+      res.send(err);
+    res.json(bears);
+  });
+})
+
 
 // REGISTER OUR ROUTES ---------------
 // all of our routes will be prefixed with /api
